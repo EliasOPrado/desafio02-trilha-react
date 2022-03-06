@@ -19,12 +19,10 @@ interface GenreResponseProps {
   title: string;
 }
 
-
 interface ContentProps{
   selectedGenreId: number;
-  selectedGenre?:GenreResponseProps
+  selectedGenre:GenreResponseProps
 }
-
 
 export function Content({selectedGenreId, selectedGenre}: ContentProps) {
   const [movies, setMovies] = useState<MovieProps[]>([]);
@@ -33,12 +31,7 @@ export function Content({selectedGenreId, selectedGenre}: ContentProps) {
     api.get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`).then(response => {
       setMovies(response.data);
     });
-
-    // api.get<GenreResponseProps>(`genres/${selectedGenreId}`).then(response => {
-    //   setSelectedGenre(response.data);
-    // })
   }, [selectedGenreId]);
-
   
   return (
     <div className="container">
